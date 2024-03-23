@@ -73,11 +73,10 @@ func (r *runner) run(pass *analysis.Pass) (any, error) {
 			}
 			if call := funcCall(n); call != nil {
 				if _, ok := m[pass.TypesInfo.ObjectOf(call)]; ok {
-					pass.Reportf(call.Pos(), "x")
+					pass.Reportf(call.Pos(), "y")
 				}
 				continue
 			}
-			pass.Reportf(n.Pos(), "x")
 		}
 	}
 	return nil, nil

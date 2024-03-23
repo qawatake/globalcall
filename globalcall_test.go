@@ -20,5 +20,9 @@ func TestAnalyzer(t *testing.T) {
 			PkgPath:  "a",
 			FuncName: "X.call",
 		},
+		globalcall.Func{
+			PkgPath:  "a",
+			FuncName: "*X.Call",
+		},
 	), "a")
 }

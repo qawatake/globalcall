@@ -11,5 +11,14 @@ import (
 // TestAnalyzer is a test for Analyzer.
 func TestAnalyzer(t *testing.T) {
 	testdata := testutil.WithModules(t, analysistest.TestData(), nil)
-	analysistest.Run(t, testdata, globalcall.Analyzer, "a")
+	analysistest.Run(t, testdata, globalcall.NewAnalyzer(
+		globalcall.Func{
+			PkgPath:  "a",
+			FuncName: "call",
+		},
+		globalcall.Func{
+			PkgPath:  "a",
+			FuncName: "X.call",
+		},
+	), "a")
 }

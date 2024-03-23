@@ -1,7 +1,18 @@
 package a
 
-func f() {
-	// The pattern can be written in regular expression.
-	var gopher int // want "pattern"
-	print(gopher)  // want "identifier is gopher"
-}
+func call() int { return 0 }
+
+var i = call() // want "x"
+
+type X struct{}
+
+func (X) call() int { return 0 }
+
+var x = X{}.call() // want "x"
+
+var z, y = call(), X{}.call() // want "x" "x"
+
+var (
+	a = call()     // want "x"
+	b = X{}.call() // want "x"
+)

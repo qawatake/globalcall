@@ -15,7 +15,7 @@ import (
 )
 
 const name = "globalcall"
-const doc = "globalcall finds calling specific functions/methods in the global scope"
+const doc = "globalcall detects that specific functions are called in a package scope"
 const url = "https://pkg.go.dev/github.com/qawatake/globalcall"
 
 func NewAnalyzer(funcs ...Func) *analysis.Analyzer {

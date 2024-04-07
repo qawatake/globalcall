@@ -4,6 +4,7 @@ import (
 	"errors"
 	"fmt"
 	"go/ast"
+	"go/token"
 	"go/types"
 	"slices"
 	"strings"
@@ -66,20 +67,24 @@ func (r *runner) run(pass *analysis.Pass) (any, error) {
 	for _, value := range values {
 		for _, n := range value.Values { // var x, y = hoge(), fuga()の右辺たち
 			if call := methodCall(n); call != nil {
-				if _, ok := m[pass.TypesInfo.ObjectOf(call)]; ok {
-					pass.Reportf(call.Pos(), "x")
+				if f, ok := m[pass.TypesInfo.ObjectOf(call)]; ok {
+					reportf(pass, call.Pos(), f.FuncName)
 				}
 				continue
 			}
 			if call := funcCall(n); call != nil {
-				if _, ok := m[pass.TypesInfo.ObjectOf(call)]; ok {
-					pass.Reportf(call.Pos(), "y")
+				if f, ok := m[pass.TypesInfo.ObjectOf(call)]; ok {
+					reportf(pass, call.Pos(), f.FuncName)
 				}
 				continue
 			}
 		}
 	}
 	return nil, nil
+}
+
+func reportf(pass *analysis.Pass, pos token.Pos, funcName string) {
+	pass.Reportf(pos, "%s must not be called in a package scope", funcName)
 }
 
 func methodCall(expr ast.Expr) (ident *ast.Ident) {

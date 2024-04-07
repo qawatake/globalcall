@@ -10,7 +10,7 @@ var i = Int() // ng because Int must not be called in a package scope.
 
 func main() {
   j := Int() // ok
-  fmt.Println(j) // ok
+  fmt.Println(j)
 }
 ```
 

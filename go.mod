@@ -16,6 +16,6 @@ require (
 	github.com/tenntenn/text/transform v0.0.0-20200319021203-7eef512accb3 // indirect
 	golang.org/x/mod v0.42.0 // indirect
 	golang.org/x/sync v0.24.0 // indirect
-	golang.org/x/text v0.3.3 // indirect
+	golang.org/x/text v0.43.0 // indirect
 	golang.org/x/tools/go/packages/packagestest v0.1.1-deprecated // indirect
 )
